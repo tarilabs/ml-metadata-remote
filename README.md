@@ -47,6 +47,37 @@ rm ml_metadata-1.14.0/metadata.sqlite.db
 
 Recomputed checksum in `ml_metadata-1.14.0/ml_metadata-1.14.0.dist-info` directory.
 
+Rebuild wheel by using `ml_metadata-1.14.0/ml_metadata` and `ml_metadata-1.14.0/ml_metadata-1.14.0.dist-info` in a temporary directory:
+
+```
+wheel pack temp
+Repacking wheel as ./ml_metadata-1.14.0-py3-none-any.whl...creating './ml_metadata-1.14.0-py3-none-any.whl' and adding 'temp' to it
+adding 'ml_metadata/__init__.py'
+adding 'ml_metadata/errors.py'
+adding 'ml_metadata/version.py'
+adding 'ml_metadata/metadata_store/__init__.py'
+adding 'ml_metadata/metadata_store/metadata_store.py'
+adding 'ml_metadata/metadata_store/metadata_store_test.py'
+adding 'ml_metadata/metadata_store/mlmd_types.py'
+adding 'ml_metadata/metadata_store/mlmd_types_test.py'
+adding 'ml_metadata/metadata_store/types.py'
+adding 'ml_metadata/metadata_store/types_test.py'
+adding 'ml_metadata/proto/__init__.py'
+adding 'ml_metadata/proto/metadata_store_pb2.py'
+adding 'ml_metadata/proto/metadata_store_service_pb2.py'
+adding 'ml_metadata/proto/metadata_store_service_pb2_grpc.py'
+adding 'ml_metadata/simple_types/__init__.py'
+adding 'ml_metadata/simple_types/proto/__init__.py'
+adding 'ml_metadata/simple_types/proto/simple_types_pb2.py'
+adding 'ml_metadata-1.14.0.dist-info/LICENSE'
+adding 'ml_metadata-1.14.0.dist-info/METADATA'
+adding 'ml_metadata-1.14.0.dist-info/WHEEL'
+adding 'ml_metadata-1.14.0.dist-info/namespace_packages.txt'
+adding 'ml_metadata-1.14.0.dist-info/top_level.txt'
+adding 'ml_metadata-1.14.0.dist-info/RECORD'
+OK
+```
+
 ## References
 
 Inspiration for manual wheel file writing: https://github.com/uranusjr/packaging-the-hard-way

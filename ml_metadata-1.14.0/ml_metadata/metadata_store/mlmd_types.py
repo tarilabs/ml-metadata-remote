@@ -17,7 +17,8 @@ import abc
 from typing import Union
 
 from ml_metadata import errors
-from ml_metadata.metadata_store.pywrap.metadata_store_extension import metadata_store as metadata_store_serialized
+# fork of ml-metadata supporting ONLY remote gRPC connection
+# from ml_metadata.metadata_store.pywrap.metadata_store_extension import metadata_store as metadata_store_serialized
 from ml_metadata.proto import metadata_store_pb2
 from ml_metadata.simple_types.proto import simple_types_pb2
 
@@ -71,12 +72,12 @@ class _SystemType(abc.ABC):
       It also raises the corresponding error from wrapped LoadSimpleTypes util
       method.
     """
-    [types_str, error_message,
-     status_code] = metadata_store_serialized.LoadSimpleTypes()
-    if status_code:
-      raise _make_exception(error_message.decode('utf-8'), status_code)
+    # [types_str, error_message,
+    #  status_code] = metadata_store_serialized.LoadSimpleTypes()
+    # if status_code:
+    #   raise _make_exception(error_message.decode('utf-8'), status_code)
     types = simple_types_pb2.SimpleTypes()
-    types.ParseFromString(types_str)
+    # types.ParseFromString(types_str)
     self._type = _get_type_proto(type_name, types)
 
   @property

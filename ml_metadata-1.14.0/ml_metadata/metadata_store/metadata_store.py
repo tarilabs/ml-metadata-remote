@@ -28,7 +28,8 @@ import grpc
 
 from ml_metadata import errors
 from ml_metadata import proto
-from ml_metadata.metadata_store.pywrap.metadata_store_extension import metadata_store as metadata_store_serialized
+# fork of ml-metadata supporting ONLY remote gRPC connection
+# from ml_metadata.metadata_store.pywrap.metadata_store_extension import metadata_store as metadata_store_serialized
 from ml_metadata.proto import metadata_store_pb2
 from ml_metadata.proto import metadata_store_service_pb2
 from ml_metadata.proto import metadata_store_service_pb2_grpc
@@ -110,19 +111,7 @@ class MetadataStore(object):
     self._max_num_retries = 5
     self._service_client_wrapper = None
     if isinstance(config, proto.ConnectionConfig):
-      self._using_db_connection = True
-      migration_options = metadata_store_pb2.MigrationOptions()
-      migration_options.enable_upgrade_migration = enable_upgrade_migration
-      self._metadata_store = metadata_store_serialized.CreateMetadataStore(
-          config.SerializeToString(), migration_options.SerializeToString())
-      logging.log(logging.INFO, 'MetadataStore with DB connection initialized')
-      logging.log(logging.DEBUG, 'ConnectionConfig: %s', config)
-      if config.HasField('retry_options'):
-        self._max_num_retries = config.retry_options.max_num_retries
-        logging.log(logging.INFO,
-                    'retry options is overwritten: max_num_retries = %d',
-                    self._max_num_retries)
-      return
+      raise RuntimeError('Unimplemented. This is fork of ml-metadata supporting ONLY remote gRPC connection')
     if not isinstance(config, proto.MetadataStoreClientConfig):
       raise ValueError('MetadataStore is expecting either '
                        'proto.ConnectionConfig or '
@@ -220,8 +209,7 @@ class MetadataStore(object):
       response: a protobuf message, filled from the return value of the method.
     """
     if self._using_db_connection:
-      cc_method = getattr(metadata_store_serialized, method_name)
-      self._pywrap_cc_call(cc_method, request, response)
+      raise RuntimeError('Unimplemented. This is fork of ml-metadata supporting ONLY remote gRPC connection')
     else:
       grpc_method = getattr(self._metadata_store_stub, method_name)
       try:
@@ -1783,8 +1771,7 @@ def downgrade_schema(config: proto.ConnectionConfig,
   try:
     migration_options = metadata_store_pb2.MigrationOptions()
     migration_options.downgrade_to_schema_version = downgrade_to_schema_version
-    metadata_store_serialized.CreateMetadataStore(
-        config.SerializeToString(), migration_options.SerializeToString())
+    raise RuntimeError('Unimplemented. This is fork of ml-metadata supporting ONLY remote gRPC connection')
   except RuntimeError as e:
     if str(e).startswith('MLMD cannot be downgraded to schema_version'):
       raise errors.make_exception(str(e), errors.INVALID_ARGUMENT) from e

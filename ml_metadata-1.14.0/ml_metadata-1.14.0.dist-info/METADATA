@@ -1,7 +1,7 @@
 Metadata-Version: 2.1
 Name: ml-metadata
 Version: 1.14.0
-Summary: A library for maintaining metadata for artifacts.
+Summary: fork of ml-metadata supporting ONLY remote gRPC connection: A library for maintaining metadata for artifacts.
 Home-page: https://github.com/google/ml-metadata
 Download-URL: https://github.com/google/ml-metadata/tags
 Author: Google LLC

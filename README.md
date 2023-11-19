@@ -45,6 +45,8 @@ docker rm -f $(docker ps -a -q)
 rm ml_metadata-1.14.0/metadata.sqlite.db
 ```
 
+Recomputed checksum in `ml_metadata-1.14.0/ml_metadata-1.14.0.dist-info` directory.
+
 ## References
 
 Inspiration for manual wheel file writing: https://github.com/uranusjr/packaging-the-hard-way
